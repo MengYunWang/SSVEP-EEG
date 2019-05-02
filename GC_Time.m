@@ -8,7 +8,6 @@ clc
 data1_name = dir ('F:\EEG\face-random\Preprocessing\Conditions\Condition1_Neutral\*.set');
 %---------------------------------------innitialize parameter
 EEG = pop_loadset('filename',data1_name(1).name,'filepath','F:\EEG\face-random\Preprocessing\Conditions\Condition1_Neutral\');
-% EEG = pop_resample( EEG, 100);
 timewin = 400; % Granger prediction parametersin ms
 timewin_points = round(timewin/(1000/EEG.srate));% convert parameters to indices
 
@@ -139,6 +138,7 @@ for ii = 1:length(data2_name);
         x2y2(ii,timei)=log(Ey/E(2,2)); % Occi to Front
     end
 end
+%%--------------------------------------------------------Dynamic faces
 
 %% ------------------------------------------------------------------Condition 3
 data3_name = dir ('F:\EEG\face-random\Preprocessing\Conditions\Condition3_N2H\*.set');
@@ -285,38 +285,11 @@ for ii = 1:length(data4_name);
     end
 end
 
-% %% Baseline Correction
-% baseline_wind = [-500 -200];
-% [~,baseline_idx1] = find (times2save == -500);
-% [~,baseline_idx2] = find (times2save == -200);
-% 
-% mean_granger = ( x2y1 + y2x1 + x2y2 + y2x2 + x2y3 + y2x3 + x2y4 + y2x4)/8;
-% baseline_granger = mean (mean_granger(:,baseline_idx1:baseline_idx2),2);
-% 
-% timebs_granger1(1,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, x2y1,baseline_granger),baseline_granger));
-% timebs_granger1(2,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, y2x1,baseline_granger),baseline_granger));
-% timebs_granger2(1,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, x2y2,baseline_granger),baseline_granger));
-% timebs_granger2(2,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, y2x2,baseline_granger),baseline_granger));
-% timebs_granger3(1,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, x2y3,baseline_granger),baseline_granger));
-% timebs_granger3(2,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, y2x3,baseline_granger),baseline_granger));
-% timebs_granger4(1,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, x2y4,baseline_granger),baseline_granger));
-% timebs_granger4(2,:,:) = 100 * (bsxfun(@rdivide, bsxfun(@minus, y2x4,baseline_granger),baseline_granger));
-% 
-% 
-% timebs_diff1 = squeeze(mean(timebs_granger1(1,:,:),2))-squeeze(mean(timebs_granger1(2,:,:),2));
-% timebs_diff2 = squeeze(mean(timebs_granger2(1,:,:),2))-squeeze(mean(timebs_granger2(2,:,:),2));
-% timebs_diff3 = squeeze(mean(timebs_granger3(1,:,:),2))-squeeze(mean(timebs_granger3(2,:,:),2));
-% timebs_diff4 = squeeze(mean(timebs_granger4(1,:,:),2))-squeeze(mean(timebs_granger4(2,:,:),2));
-% 
-% timebs_Static= (timebs_diff1 + timebs_diff2)/2;
-% timebs_Dynamic = (timebs_diff3 + timebs_diff4)/2;
 
 save TGC_40+400+200  times2save bic1  bic2 bic3 bic4...
     data_station1 data_station2 data_station3 data_station4...
     x2y1 y2x1 x2y2 y2x2 x2y3 y2x3 x2y4 y2x4
-%     timebs_granger1 timebs_granger2 timebs_granger3 timebs_granger4...
-%     timebs_diff1 timebs_diff2 timebs_diff3 timebs_diff4...
-%     timebs_Static timebs_Dynamic
+
 
 %%
 clear all
