@@ -2,9 +2,9 @@
 % The preprocessing consisted of two stages:
 % Stage I: preICA and run ICA
 %   preICA: Import data> Channel Location > Filter > resample the data>  
-%           rereference the data > extract all epoches > reject bad trials
+%           rereference the data > extract all epoches >  Baseline correction >reject bad trials
 %   run ICA: runica > exclude artifacts with ADjust
-%   Baseline correction
+%  
 
 % Stage II: extract conditions
 
@@ -23,11 +23,6 @@ for subi = 101:121;
     EEG.setname = [num2str(subi),'_preICA'];
     EEG = pop_chanedit(EEG, 'lookup','D:\\Program Files\\MATLAB\\R2014a\\matlabtoolbox\\eeglab14_1_2b\\plugins\\dipfit2.3\\standard_BESA\\standard-10-5-cap385.elp');
     EEG =pop_eegfiltnew(EEG, 0.5,45,13518,0,[],0);
-%     EEG = pop_eegfiltnew(EEG,1,30,6760,0,[],0);
-%     EEG = pop_eegfiltnew(EEG, [],0.5,13518,1,[],0);
-%     EEG = pop_eegfiltnew(EEG, [],1,6760,1,[],0);
-%     EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:64] ,'computepower',1,'linefreqs',[50 100] ,'normSpectrum',0,...
-%         'p',0.01,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',4,'winstep',4);
     EEG = pop_resample( EEG, 250);
     EEG = pop_reref( EEG, []);
     EEG = pop_epoch( EEG, {'1' '2' '3' '4'}, [-0.7 2.5], 'epochinfo', 'yes');
