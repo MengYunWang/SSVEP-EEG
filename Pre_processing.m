@@ -59,6 +59,8 @@ for subi=101:121;
     EEG = pop_saveset( EEG, 'filename',[num2str(subi), '_runICA.set'],'filepath','F:\face-random\Preprocessing\ICA');
 end
 % sub 110 115 117 119 121 were excluded!!!!!!
+
+
 %% Stage2-select the conditions
 clear all
 clc
