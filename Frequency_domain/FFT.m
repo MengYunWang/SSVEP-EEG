@@ -6,7 +6,8 @@
 %% FFT for each condition
 clear all
 clc
-%--------------------------------------------------------------------Condition 1
+
+%--------------------------------------------------------------------Condition 1 Neutral
 data1_name = dir ('F:\face-random\Preprocessing\Conditions\Condition1_Neutral\*.set');
 EEG = pop_loadset('filename',data1_name(1).name,'filepath','F:\face-random\Preprocessing\Conditions\Condition1_Neutral');
 %define parameters
@@ -41,7 +42,8 @@ for ii = 1:length(data1_name);
 end
     Neutral_amp(:,:,[10,15,17,19,21]) = nan;
     Neutral_pow(:,:,[10,15,17,19,21]) = nan;
-%--------------------------------------------------------------------Condition 2
+
+%--------------------------------------------------------------------Condition 2 Happy
 data2_name = dir ('F:\face-random\Preprocessing\Conditions\Condition2_Happy\*.set');
 for ii = 1:length(data2_name);
     EEG = pop_loadset('filename',data2_name(ii).name,'filepath','F:\face-random\Preprocessing\Conditions\Condition2_Happy\');
@@ -56,7 +58,8 @@ for ii = 1:length(data2_name);
 end
     Happy_amp(:,:,[10,15,17,19,21]) = nan;
     Happy_pow(:,:,[10,15,17,19,21]) = nan;
-%--------------------------------------------------------------------Condition 3
+
+%--------------------------------------------------------------------Condition 3 N2H
 data3_name = dir ('F:\face-random\Preprocessing\Conditions\Condition3_N2H\*.set');
 for ii = 1:length(data3_name);
     EEG = pop_loadset('filename',data3_name(ii).name,'filepath','F:\face-random\Preprocessing\Conditions\Condition3_N2H\');
@@ -71,7 +74,8 @@ for ii = 1:length(data3_name);
 end
     N2H_amp(:,:,[10,15,17,19,21]) = nan;
     N2H_pow(:,:,[10,15,17,19,21]) = nan;
-%--------------------------------------------------------------------Condition 4
+
+%--------------------------------------------------------------------Condition 4 H2N
 data4_name = dir ('F:\face-random\Preprocessing\Conditions\Condition4_H2N\*.set');
 for ii = 1:length(data4_name);
     EEG = pop_loadset('filename',data4_name(ii).name,'filepath','F:\face-random\Preprocessing\Conditions\Condition4_H2N\');
