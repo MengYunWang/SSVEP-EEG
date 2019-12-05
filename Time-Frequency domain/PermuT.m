@@ -1,18 +1,20 @@
-%¡¡permutation t tests
+% permutation t tests
 % Actual t values > swap two conditions for 1k times and compute the t
 % values> get the largest and smallest t value for each time> get a t value
 % distribution > decide whether the actual t value is significant or not
 
+% Created by M.-Y. Wang
+% 05-12-2019
 
 %% permutation t tests
 
 clear all
 clc
 
-load ssVEP_TF_10+20.mat
+load ssVEP_TF_10.mat
 %------------------------------------------------------Neutral vs Happy
-    neutral_data = squeeze (nanmean (Neutral_dB (1,[27:30,64],:,:),2));
-    happy_data = squeeze (nanmean (Happy_dB (1,[27:30,64],:,:),2));
+    neutral_data = squeeze (nanmean (Neutral_dB ([27:30,64],:,:)));
+    happy_data = squeeze (nanmean (Happy_dB ([27:30,64],:,:)));
     neutral_data (:, [10 15 17 19 21]) = [];
     happy_data (:, [10 15 17 19 21]) = [];
     data_differ = happy_data - neutral_data;
@@ -36,8 +38,8 @@ load ssVEP_TF_10+20.mat
     upper_t1 = prctile(t_perm,97.5,2);
 
 %------------------------------------------------------N2H vs H2N
-    n2h_data = squeeze (nanmean (N2H_dB (1,[27:30,64],:,:),2));
-    h2n_data = squeeze (nanmean (H2N_dB (1,[27:30,64],:,:),2));
+    n2h_data = squeeze (nanmean (N2H_dB ([27:30,64],:,:)));
+    h2n_data = squeeze (nanmean (H2N_dB ([27:30,64],:,:)));
     n2h_data (:, [10 15 17 19 21]) = [];
     h2n_data (:, [10 15 17 19 21]) = [];
     data_differ = n2h_data - h2n_data;
@@ -61,8 +63,8 @@ load ssVEP_TF_10+20.mat
     
 
 %------------------------------------------------------Dynamic vs Static
-    static_data = squeeze (nanmean (Static_dB (1,[27:30,64],:,:),2));
-    dynamic_data = squeeze (nanmean (Dynamic_dB (1,[27:30,64],:,:),2));
+    static_data = squeeze (nanmean (Static_dB ([27:30,64],:,:)));
+    dynamic_data = squeeze (nanmean (Dynamic_dB ([27:30,64],:,:)));
     static_data (:, [10 15 17 19 21]) = [];
     dynamic_data (:, [10 15 17 19 21]) = [];
     data_differ = dynamic_data - static_data;
@@ -83,9 +85,10 @@ load ssVEP_TF_10+20.mat
     end
     lower_t3 = prctile(t_perm, 2.5,2);
     upper_t3 = prctile(t_perm,97.5,2);
+    
     save permu_t t_real1 t_real2 t_real3 lower_t1 lower_t2 lower_t3...
         upper_t1 upper_t2 upper_t3
-%%
+%%----------------------------------------------------------------------------
     figure, clf
     set (gcf,'color','w')
     plot (time2save, t_real1, '-k','linewidth',2.5)
