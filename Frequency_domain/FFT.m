@@ -1,7 +1,7 @@
 %% Transform the time domain into frequency domain
 
 % Created by M.-Y. Wang
-% 25-10-2017
+% 05-12-2019
 
 %% FFT for each condition
 clear all
