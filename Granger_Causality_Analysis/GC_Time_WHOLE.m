@@ -1,6 +1,7 @@
 %% Granger Causality
 % 2018-01-23
 % Meng-yun Wang
+
 %% ---------------------------------------------------------STATIC FACE
 clear all
 clc
